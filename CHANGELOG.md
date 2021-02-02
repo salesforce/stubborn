@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.0.1 - 2021-02-02
+## Changed
+- Licence and document updates
+- Migrate from krux to salesforce github account
+
 ## 2.0.0 - 2020-10-23
 ### Chagned
 - Deprecate scala 2.10 and 2.11 supoort, add 2.13 support

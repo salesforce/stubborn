@@ -7,8 +7,8 @@
 
 A scala library for performing retries on actions that might fail.
 
-This project is migrated from https://github.com/krux/stubborn for all versions
-and previous commit history, please go to https://github.com/krux/stubborn
+This project is migrated from https://github.com/krux/stubborn. Please refer to
+that repo for commit histories prior to 3.0.0.
 
 ## Configuration
 
@@ -19,7 +19,7 @@ Add stubborn as a dependency in your `build.sbt` or `Build.scala` as appropriate
 ```scala
 libraryDependencies ++= Seq(
   // Other dependencies ...
-  "com.krux" %% "stubborn" % "3.0.0"
+  "com.krux" %% "stubborn" % "3.0.1"
 )
 ```
 
@@ -32,8 +32,4 @@ This project is compiled, tested, and published for the following Scala versions
 
 ## Usage
 
-See examples in `examples` [directory](https://github.com/krux/stubborn/tree/master/examples).
-
-## License
-
-Stubborn is licensed under [APL 2.0](LICENSE).
+See examples in `examples` [directory](https://github.com/salesforce/stubborn/tree/master/examples).
