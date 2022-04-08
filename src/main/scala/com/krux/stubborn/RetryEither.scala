@@ -7,10 +7,9 @@
 
 package com.krux.stubborn
 
-import org.slf4j.{LoggerFactory, Logger}
+import org.slf4j.{Logger, LoggerFactory}
 
 import com.krux.stubborn.policy.Policy
-
 
 trait RetryEither { policy: Policy =>
 
@@ -29,11 +28,11 @@ trait RetryEither { policy: Policy =>
 object RetryEither extends RetryDefaults {
 
   def retry[L, R](
-      maxRetry: Int = defaultMaxRetry,
-      policy: Policy = defaultPolicy,
-      logger: Logger = defaultLogger,
-      currentAttempt: Int = 0
-    )(action: => Either[L, R]): Either[L, R] = {
+    maxRetry: Int = defaultMaxRetry,
+    policy: Policy = defaultPolicy,
+    logger: Logger = defaultLogger,
+    currentAttempt: Int = 0
+  )(action: => Either[L, R]): Either[L, R] = {
 
     if (currentAttempt < maxRetry)
       action match {
@@ -41,7 +40,9 @@ object RetryEither extends RetryDefaults {
           r
         case l @ Left(_) =>
           val delay = policy.retryDelay(currentAttempt)
-          logger.info(s"Action returns left, retry (attempt $currentAttempt) after $delay milliseconds...")
+          logger.info(
+            s"Action returns left, retry (attempt $currentAttempt) after $delay milliseconds..."
+          )
           Thread.sleep(delay)
           retry(maxRetry, policy, logger, currentAttempt + 1)(action)
       }
