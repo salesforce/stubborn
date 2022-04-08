@@ -9,7 +9,6 @@ package com.krux.stubborn.policy
 
 import scala.util.Random
 
-
 /**
  * Implements the FullJitter algorithm in
  * https://www.awsarchitectureblog.com/2015/03/backoff.html

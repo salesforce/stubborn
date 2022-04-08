@@ -7,10 +7,9 @@
 
 package com.krux.stubborn
 
-import org.slf4j.{LoggerFactory, Logger}
+import org.slf4j.{Logger, LoggerFactory}
 
 import com.krux.stubborn.policy.Policy
-
 
 trait Retryable { policy: Policy =>
 
@@ -30,17 +29,17 @@ trait Retryable { policy: Policy =>
 
 object Retryable extends RetryDefaults {
 
-  def defaultShouldRetry: PartialFunction[Throwable, Throwable] = {
-    case e: RuntimeException => e
+  def defaultShouldRetry: PartialFunction[Throwable, Throwable] = { case e: RuntimeException =>
+    e
   }
 
   def retry[A](
-      maxRetry: Int = defaultMaxRetry,
-      policy: Policy,
-      shouldRetry: PartialFunction[Throwable, Throwable] = defaultShouldRetry,
-      logger: Logger = defaultLogger,
-      currentAttempt: Int = 0
-    )(action: => A): A = {
+    maxRetry: Int = defaultMaxRetry,
+    policy: Policy,
+    shouldRetry: PartialFunction[Throwable, Throwable] = defaultShouldRetry,
+    logger: Logger = defaultLogger,
+    currentAttempt: Int = 0
+  )(action: => A): A = {
 
     if (currentAttempt < maxRetry) {
       try {
@@ -48,7 +47,9 @@ object Retryable extends RetryDefaults {
       } catch {
         shouldRetry.andThen { e =>
           val delay = policy.retryDelay(currentAttempt)
-          logger.info(s"Caught exception: ${e.getMessage}\n Retry (Attempt ${currentAttempt}) after $delay milliseconds...")
+          logger.info(
+            s"Caught exception: ${e.getMessage}\n Retry (Attempt ${currentAttempt}) after $delay milliseconds..."
+          )
           Thread.sleep(delay)
           retry(maxRetry, policy, shouldRetry, logger, currentAttempt + 1)(action)
         }

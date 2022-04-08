@@ -7,7 +7,6 @@
 
 package com.krux.stubborn.policy
 
-
 trait ExponentialBackoff extends Policy {
 
   def base: Int = ExponentialBackoff.defaultBase

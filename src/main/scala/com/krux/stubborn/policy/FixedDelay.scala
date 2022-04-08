@@ -7,7 +7,6 @@
 
 package com.krux.stubborn.policy
 
-
 trait FixedDelay extends Policy {
 
   def fixedDelay: Int = FixedDelay.defaultFixedDelay

@@ -9,8 +9,7 @@ package com.krux.stubborn
 
 import org.slf4j.{Logger, LoggerFactory}
 
-import com.krux.stubborn.policy.{Policy, ExponentialBackoffAndJitter}
-
+import com.krux.stubborn.policy.{ExponentialBackoffAndJitter, Policy}
 
 trait RetryDefaults {
 
@@ -18,6 +17,6 @@ trait RetryDefaults {
 
   val defaultMaxRetry = 3
 
-  def defaultPolicy: Policy = new ExponentialBackoffAndJitter{}
+  def defaultPolicy: Policy = new ExponentialBackoffAndJitter {}
 
 }
