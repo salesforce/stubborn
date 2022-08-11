@@ -7,8 +7,9 @@
 
 package com.krux.stubborn
 
-import org.slf4j.{Logger, LoggerFactory}
+import scala.util.Try
 
+import org.slf4j.{Logger, LoggerFactory}
 import com.krux.stubborn.policy.Policy
 
 trait Retryable { policy: Policy =>
@@ -57,6 +58,16 @@ object Retryable extends RetryDefaults {
     } else {
       action
     }
+  }
+
+  def retryWrapper[A](
+    maxRetry: Int = defaultMaxRetry,
+    policy: Policy,
+    shouldRetry: PartialFunction[Throwable, Throwable] = defaultShouldRetry,
+    logger: Logger = defaultLogger,
+    currentAttempt: Int = 0
+  )(action: => A): Try[A] = {
+    Try { retry(maxRetry, policy, shouldRetry, logger, currentAttempt)(action) }
   }
 
 }
