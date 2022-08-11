@@ -10,6 +10,7 @@ package com.krux.stubborn
 import scala.util.Try
 
 import org.slf4j.{Logger, LoggerFactory}
+
 import com.krux.stubborn.policy.Policy
 
 trait Retryable { policy: Policy =>
